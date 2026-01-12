@@ -64,7 +64,8 @@
     </script>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" type="image/png" href="/favicon.png">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -202,11 +203,20 @@
             background: hsl(240, 0%, 22%);
             padding: 2rem 1rem;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            user-select: none;
+        }
+
+        .hero-sensor-values .sensor-grid {
+            display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
             gap: 3rem;
-            user-select: none;
+            width: 100%;
         }
 
         .sensor-reading {
@@ -234,14 +244,103 @@
 
         .sensor-reading.flow .value {
             color: #2b908f;
+            text-shadow: 0 0 20px rgba(43, 144, 143, 0.5);
+            animation: pulse-blue 3s ease-in-out infinite;
         }
 
         .sensor-reading.pressure .value {
             color: #90ee7e;
+            text-shadow: 0 0 20px rgba(144, 238, 126, 0.5);
+            animation: pulse-green 3s ease-in-out infinite 1s;
         }
 
         .sensor-reading.volume .value {
             color: #f45b5b;
+            text-shadow: 0 0 20px rgba(244, 91, 91, 0.5);
+            animation: pulse-red 3s ease-in-out infinite 2s;
+        }
+
+        @keyframes pulse-blue {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(43, 144, 143, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(43, 144, 143, 0.8);
+            }
+        }
+
+        @keyframes pulse-green {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(144, 238, 126, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(144, 238, 126, 0.8);
+            }
+        }
+
+        @keyframes pulse-red {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(244, 91, 91, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(244, 91, 91, 0.8);
+            }
+        }
+
+        .sensor-reading {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sensor-reading:hover {
+            transform: scale(1.05);
+        }
+
+        .sensor-reading .value {
+            transition: all 0.5s ease;
+        }
+
+        .sensor-reading.updating .value {
+            animation: flash 0.5s ease;
+        }
+
+        @keyframes flash {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Live Data Indicator */
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #90ee7e;
+            margin-bottom: 1rem;
+        }
+
+        .live-indicator::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #90ee7e;
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 10px rgba(144, 238, 126, 0.8);
+            }
+            50% {
+                opacity: 0.3;
+                box-shadow: 0 0 5px rgba(144, 238, 126, 0.3);
+            }
         }
 
         /* CTA Section in Hero */
@@ -634,8 +733,13 @@
 
             .hero-sensor-values {
                 flex-direction: column;
-                gap: 2rem;
+                gap: 1.5rem;
                 padding: 2rem 0.5rem;
+            }
+
+            .hero-sensor-values .sensor-grid {
+                flex-direction: column;
+                gap: 2rem;
             }
 
             .sensor-reading .value {
@@ -691,17 +795,20 @@
         </div>
 
         <div class="hero-sensor-values">
-            <div class="sensor-reading flow">
-                <div class="value">45.8</div>
-                <div class="label">L/s Flow Rate</div>
-            </div>
-            <div class="sensor-reading pressure">
-                <div class="value">5.2</div>
-                <div class="label">bar Pressure</div>
-            </div>
-            <div class="sensor-reading volume">
-                <div class="value">12,847</div>
-                <div class="label">m³ Volume</div>
+            <div class="live-indicator">LIVE DATA</div>
+            <div class="sensor-grid">
+                <div class="sensor-reading flow">
+                    <div class="value" id="flow-value" data-value="45.8">45.8</div>
+                    <div class="label">L/s Flow Rate</div>
+                </div>
+                <div class="sensor-reading pressure">
+                    <div class="value" id="pressure-value" data-value="5.2">5.2</div>
+                    <div class="label">bar Pressure</div>
+                </div>
+                <div class="sensor-reading volume">
+                    <div class="value" id="volume-value" data-value="12847">12,847</div>
+                    <div class="label">m³ Volume</div>
+                </div>
             </div>
         </div>
 
@@ -1012,5 +1119,128 @@
             <p style="margin-top: 0.5rem;">Built with Node.js, React, Supabase, TimescaleDB, and React Native</p>
         </div>
     </footer>
+
+    <script>
+        // Real-time Sensor Data Animation
+        (function() {
+            const flowEl = document.getElementById('flow-value');
+            const pressureEl = document.getElementById('pressure-value');
+            const volumeEl = document.getElementById('volume-value');
+
+            // Sensor value ranges (realistic for water distribution)
+            const ranges = {
+                flow: { min: 35, max: 65 },        // L/s
+                pressure: { min: 4.0, max: 7.5 },  // bar
+                volume: { start: 12800 }           // m³ (cumulative)
+            };
+
+            // Current values
+            let currentValues = {
+                flow: 45.8,
+                pressure: 5.2,
+                volume: 12847
+            };
+
+            // Generate realistic random value within range
+            function getRandomValue(min, max, decimals = 1) {
+                const value = Math.random() * (max - min) + min;
+                return parseFloat(value.toFixed(decimals));
+            }
+
+            // Format number with thousands separator
+            function formatNumber(num, decimals = 1) {
+                if (num >= 1000) {
+                    return num.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                }
+                return num.toFixed(decimals);
+            }
+
+            // Smooth transition between values
+            function animateValue(element, start, end, duration, formatting) {
+                const startTime = performance.now();
+                const parent = element.parentElement;
+
+                // Add updating class for flash animation
+                parent.classList.add('updating');
+
+                function update(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    // Ease-in-out function for smooth transition
+                    const easeProgress = progress < 0.5
+                        ? 2 * progress * progress
+                        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+                    const current = start + (end - start) * easeProgress;
+                    element.textContent = formatting(current);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    } else {
+                        parent.classList.remove('updating');
+                    }
+                }
+
+                requestAnimationFrame(update);
+            }
+
+            // Update sensor values
+            function updateSensorValues() {
+                // Generate new values with slight variations
+                const newFlow = getRandomValue(ranges.flow.min, ranges.flow.max, 1);
+                const newPressure = getRandomValue(ranges.pressure.min, ranges.pressure.max, 1);
+                // Volume increases gradually
+                const volumeIncrement = getRandomValue(0.5, 2.0, 1);
+                const newVolume = currentValues.volume + volumeIncrement;
+
+                // Animate flow rate
+                animateValue(
+                    flowEl,
+                    currentValues.flow,
+                    newFlow,
+                    800,
+                    (val) => formatNumber(val, 1)
+                );
+
+                // Animate pressure
+                animateValue(
+                    pressureEl,
+                    currentValues.pressure,
+                    newPressure,
+                    800,
+                    (val) => formatNumber(val, 1)
+                );
+
+                // Animate volume
+                animateValue(
+                    volumeEl,
+                    currentValues.volume,
+                    newVolume,
+                    800,
+                    (val) => formatNumber(val, 0)
+                );
+
+                // Update current values
+                currentValues.flow = newFlow;
+                currentValues.pressure = newPressure;
+                currentValues.volume = newVolume;
+            }
+
+            // Initial update after 2 seconds
+            setTimeout(updateSensorValues, 2000);
+
+            // Update every 5 seconds (matching the "5-second updates" tagline)
+            setInterval(updateSensorValues, 5000);
+
+            // Add click interaction to sensor readings
+            document.querySelectorAll('.sensor-reading').forEach(reading => {
+                reading.addEventListener('click', function() {
+                    // Trigger immediate update on click
+                    updateSensorValues();
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
