@@ -1,6 +1,5 @@
 import { Logger } from 'pino';
 import { SupabaseClient } from '@supabase/supabase-js';
-import type { FlowData } from '@scada/types';
 import { getSimulator } from '../simulator';
 
 interface HistorianConfig {

@@ -45,13 +45,13 @@ app.use(cors());
 app.use(express.json());
 
 // Request logging
-app.use((req, res, next) => {
+app.use((req, _res, next) => {
   logger.info({ method: req.method, url: req.url }, 'Incoming request');
   next();
 });
 
 // Health check endpoint
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
@@ -67,11 +67,11 @@ app.use('/api', createAPIRouter());
 app.use(
   (
     err: Error,
-    req: express.Request,
+    _req: express.Request,
     res: express.Response,
-    next: express.NextFunction
+    _next: express.NextFunction
   ) => {
-    logger.error({ err, url: req.url }, 'Request error');
+    logger.error({ err }, 'Request error');
     res.status(500).json({
       error: 'Internal server error',
       message: process.env.NODE_ENV === 'development' ? err.message : undefined,

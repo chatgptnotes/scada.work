@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "buildCommand": "echo 'No web apps to build yet. Edge server should be deployed separately via Docker.'",
+  "outputDirectory": "public",
+  "ignoreCommand": "exit 0"
+}

@@ -9,12 +9,12 @@ export function createAPIRouter(): Router {
   const supabase = getSupabaseClient();
 
   // System status endpoint
-  router.get('/status', (req, res) => {
+  router.get('/status', (_req, res) => {
     const simulator = getSimulator();
     const historian = getHistorian();
     const alarmEngine = getAlarmEngine();
 
-    res.json({
+    return res.json({
       status: 'online',
       uptime: process.uptime(),
       timestamp: new Date().toISOString(),
@@ -34,7 +34,7 @@ export function createAPIRouter(): Router {
   });
 
   // Get simulated devices
-  router.get('/simulator/devices', (req, res) => {
+  router.get('/simulator/devices', (_req, res) => {
     const simulator = getSimulator();
 
     if (!simulator) {
@@ -42,11 +42,11 @@ export function createAPIRouter(): Router {
     }
 
     const devices = simulator.getDevices();
-    res.json({ devices });
+    return res.json({ devices });
   });
 
   // Get supply lines
-  router.get('/supply-lines', async (req, res) => {
+  router.get('/supply-lines', async (_req, res) => {
     try {
       const { data, error } = await supabase
         .from('supply_lines')
@@ -64,14 +64,15 @@ export function createAPIRouter(): Router {
         return res.status(500).json({ error: error.message });
       }
 
-      res.json({ supply_lines: data });
-    } catch (error: any) {
-      res.status(500).json({ error: error.message });
+      return res.json({ supply_lines: data });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return res.status(500).json({ error: errorMessage });
     }
   });
 
   // Get latest flow data
-  router.get('/flow-data/latest', async (req, res) => {
+  router.get('/flow-data/latest', async (_req, res) => {
     try {
       const { data, error } = await supabase
         .from('latest_flow_data')
@@ -82,9 +83,10 @@ export function createAPIRouter(): Router {
         return res.status(500).json({ error: error.message });
       }
 
-      res.json({ flow_data: data });
-    } catch (error: any) {
-      res.status(500).json({ error: error.message });
+      return res.json({ flow_data: data });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return res.status(500).json({ error: errorMessage });
     }
   });
 
@@ -125,14 +127,15 @@ export function createAPIRouter(): Router {
         return res.status(500).json({ error: error.message });
       }
 
-      res.json({ flow_data: data });
-    } catch (error: any) {
-      res.status(500).json({ error: error.message });
+      return res.json({ flow_data: data });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return res.status(500).json({ error: errorMessage });
     }
   });
 
   // Get active alarms
-  router.get('/alarms/active', async (req, res) => {
+  router.get('/alarms/active', async (_req, res) => {
     try {
       const { data, error } = await supabase
         .from('active_alarms_detailed')
@@ -143,9 +146,10 @@ export function createAPIRouter(): Router {
         return res.status(500).json({ error: error.message });
       }
 
-      res.json({ alarms: data });
-    } catch (error: any) {
-      res.status(500).json({ error: error.message });
+      return res.json({ alarms: data });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return res.status(500).json({ error: errorMessage });
     }
   });
 
@@ -172,9 +176,10 @@ export function createAPIRouter(): Router {
         return res.status(500).json({ error: error.message });
       }
 
-      res.json({ alarms: data });
-    } catch (error: any) {
-      res.status(500).json({ error: error.message });
+      return res.json({ alarms: data });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return res.status(500).json({ error: errorMessage });
     }
   });
 
@@ -189,9 +194,10 @@ export function createAPIRouter(): Router {
         await alarmEngine.acknowledgeAlarm(alarm_id, user_id, notes);
       }
 
-      res.json({ success: true, message: 'Alarm acknowledged' });
-    } catch (error: any) {
-      res.status(500).json({ error: error.message });
+      return res.json({ success: true, message: 'Alarm acknowledged' });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return res.status(500).json({ error: errorMessage });
     }
   });
 
@@ -232,13 +238,14 @@ export function createAPIRouter(): Router {
         return res.status(500).json({ error: alarmsError.message });
       }
 
-      res.json({
+      return res.json({
         summary,
         supply_lines: supplyLines,
         active_alarms: alarms || [],
       });
-    } catch (error: any) {
-      res.status(500).json({ error: error.message });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return res.status(500).json({ error: errorMessage });
     }
   });
 
@@ -272,14 +279,15 @@ export function createAPIRouter(): Router {
         return res.status(500).json({ error: error.message });
       }
 
-      res.json({ reports: data });
-    } catch (error: any) {
-      res.status(500).json({ error: error.message });
+      return res.json({ reports: data });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return res.status(500).json({ error: errorMessage });
     }
   });
 
   // Health check with detailed metrics
-  router.get('/metrics', (req, res) => {
+  router.get('/metrics', (_req, res) => {
     const simulator = getSimulator();
     const historian = getHistorian();
     const alarmEngine = getAlarmEngine();
@@ -303,7 +311,7 @@ export function createAPIRouter(): Router {
       },
     };
 
-    res.json(metrics);
+    return res.json(metrics);
   });
 
   return router;
