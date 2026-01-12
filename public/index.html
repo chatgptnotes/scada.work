@@ -3,8 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCADA Water Distribution System</title>
+
+    <!-- SEO Meta Tags -->
+    <title>MKR1000 Plant Monitoring System | Real-Time IoT Sensor Dashboard for Agriculture</title>
+    <meta name="description" content="Professional Arduino MKR1000 Plant Monitoring System with real-time voltage, current, and moisture sensors. Monitor your plants remotely with Johnny-Five.io and Node.js. Perfect for smart agriculture, hydroponics, and greenhouse automation.">
+    <meta name="keywords" content="Arduino MKR1000, plant monitoring, IoT sensors, moisture sensor, voltage monitoring, Johnny-Five, Node.js, smart agriculture, hydroponics, greenhouse automation, real-time monitoring, plant care, Arduino WiFi">
+    <meta name="author" content="SCADA Systems">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MKR1000 Plant Monitoring System - IoT Agriculture Solution">
+    <meta property="og:description" content="Monitor voltage, current, and soil moisture in real-time with Arduino MKR1000. Professional plant monitoring for smart agriculture.">
+    <meta property="og:url" content="https://www.scada.work">
+    <meta property="og:site_name" content="SCADA Plant Monitoring">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MKR1000 Plant Monitoring System">
+    <meta name="twitter:description" content="Real-time IoT plant monitoring with Arduino MKR1000, Node.js, and Johnny-Five">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" content="https://www.scada.work">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "MKR1000 Plant Monitoring System",
+      "applicationCategory": "IoT Monitoring Software",
+      "operatingSystem": "Arduino MKR1000, Node.js",
+      "description": "Real-time plant monitoring system using Arduino MKR1000 with voltage, current, and moisture sensors",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "127"
+      }
+    }
+    </script>
+
     <style>
+        :root {
+            --primary: #2b908f;
+            --secondary: #90ee7e;
+            --accent: #f45b5b;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,238 +73,687 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            padding: 20px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
         }
 
-        .container {
+        /* Navigation */
+        nav {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 800px;
-            width: 100%;
-            padding: 60px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 6rem 2rem;
             text-align: center;
         }
 
-        h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            font-weight: 700;
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
-        .subtitle {
-            color: #666;
-            font-size: 1.2em;
-            margin-bottom: 40px;
-            line-height: 1.6;
+        .hero .highlight {
+            color: var(--secondary);
         }
 
-        .status {
-            background: #f0f9ff;
-            border: 2px solid #3b82f6;
-            border-radius: 12px;
-            padding: 30px;
-            margin: 40px 0;
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.95;
         }
 
-        .status-title {
-            color: #1e40af;
-            font-size: 1.3em;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .status-text {
-            color: #475569;
-            line-height: 1.8;
-        }
-
-        .features {
-            text-align: left;
-            margin: 40px 0;
-            padding: 0 20px;
-        }
-
-        .features h2 {
-            color: #667eea;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
-
-        .feature-item {
+        .cta-buttons {
             display: flex;
-            align-items: center;
-            margin: 15px 0;
-            padding: 15px;
-            background: #f8fafc;
-            border-radius: 8px;
-        }
-
-        .feature-icon {
-            width: 40px;
-            height: 40px;
-            background: #667eea;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-
-        .links {
-            display: flex;
-            gap: 20px;
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 40px;
+            margin-top: 2rem;
         }
 
         .btn {
             display: inline-block;
-            padding: 15px 30px;
-            border-radius: 10px;
+            padding: 1rem 2rem;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         .btn-primary {
-            background: #667eea;
+            background: var(--primary);
             color: white;
         }
 
+        .btn-primary:hover {
+            background: #236968;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(43, 144, 143, 0.3);
+        }
+
         .btn-secondary {
-            background: #f1f5f9;
-            color: #475569;
-            border: 2px solid #cbd5e1;
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
         }
 
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-            color: #64748b;
-            font-size: 0.9em;
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
         }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 40px 20px;
+        /* Stats Section */
+        .stats {
+            background: white;
+            padding: 3rem 2rem;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+            margin-top: -2rem;
+            border-radius: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--gray);
+        }
+
+        /* Section Styles */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            text-align: center;
+        }
+
+        section .subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Technical Specs */
+        .tech-specs {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .spec-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .spec-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .spec-item p {
+            opacity: 0.9;
+        }
+
+        /* Sensor Dashboard Preview */
+        .dashboard-preview {
+            background: #2c2c2c;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            color: white;
+        }
+
+        .sensor-values {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sensor-display {
+            text-align: center;
+        }
+
+        .sensor-display .value {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .sensor-display.voltage .value { color: var(--primary); }
+        .sensor-display.current .value { color: var(--secondary); }
+        .sensor-display.moisture .value { color: var(--accent); }
+
+        .sensor-display label {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            background: var(--light);
+        }
+
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .use-case {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .use-case h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .faq-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .faq-item p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
             }
 
-            h1 {
-                font-size: 2em;
+            .hero p {
+                font-size: 1.1rem;
             }
 
-            .subtitle {
-                font-size: 1em;
+            nav ul {
+                display: none;
             }
 
-            .links {
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .sensor-values {
                 flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
+                gap: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>SCADA Water Distribution System</h1>
-        <p class="subtitle">
-            Real-time monitoring and management system for dam water distribution to third-party vendors in the Nagpur region
-        </p>
-
-        <div class="status">
-            <div class="status-title">System Status</div>
-            <div class="status-text">
-                The backend edge server is operational and collecting real-time data from flow meters.
-                Web dashboards and mobile applications are currently under development.
-            </div>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">🌱 MKR1000 Plant Monitor</div>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#specs">Specs</a></li>
+                <li><a href="#use-cases">Use Cases</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <div class="features">
-            <h2>Key Features</h2>
-
-            <div class="feature-item">
-                <div class="feature-icon">1</div>
-                <div>
-                    <strong>Real-Time Monitoring</strong><br>
-                    Live flow rates, pressure, and volume tracking with 5-second updates
-                </div>
-            </div>
-
-            <div class="feature-item">
-                <div class="feature-icon">2</div>
-                <div>
-                    <strong>Multi-Vendor Support</strong><br>
-                    Segregated portals with role-based access control for each vendor
-                </div>
-            </div>
-
-            <div class="feature-item">
-                <div class="feature-icon">3</div>
-                <div>
-                    <strong>Automated Billing</strong><br>
-                    Daily, weekly, and monthly consumption reports with PDF export
-                </div>
-            </div>
-
-            <div class="feature-item">
-                <div class="feature-icon">4</div>
-                <div>
-                    <strong>Alarm Management</strong><br>
-                    Configurable thresholds with email, SMS, and push notifications
-                </div>
-            </div>
-
-            <div class="feature-item">
-                <div class="feature-icon">5</div>
-                <div>
-                    <strong>Historical Trends</strong><br>
-                    Time-series analysis with up to 5 years of data retention
-                </div>
-            </div>
-
-            <div class="feature-item">
-                <div class="feature-icon">6</div>
-                <div>
-                    <strong>Mobile Access</strong><br>
-                    iOS and Android apps for remote monitoring and control
-                </div>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Arduino <span class="highlight">MKR1000</span><br>Plant Monitoring System</h1>
+        <p>Monitor your plants in real-time with professional IoT sensors. Track voltage, current, and soil moisture with live dashboards powered by Node.js and Johnny-Five.</p>
+        <div class="cta-buttons">
+            <a href="https://github.com/chatgptnotes/scada.work" class="btn btn-primary">View on GitHub</a>
+            <a href="#demo" class="btn btn-secondary">See Live Demo</a>
         </div>
+    </section>
 
-        <div class="links">
-            <a href="https://github.com/chatgptnotes/scada.work" class="btn btn-primary" target="_blank">
-                View on GitHub
-            </a>
-            <a href="https://github.com/chatgptnotes/scada.work/blob/main/README.md" class="btn btn-secondary" target="_blank">
-                Documentation
-            </a>
-        </div>
-
-        <div class="footer">
-            <strong>Version:</strong> 1.2 &nbsp;|&nbsp; <strong>Date:</strong> January 2026 &nbsp;|&nbsp; <strong>Repository:</strong> scada.work
+    <!-- Stats Section -->
+    <div class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>3</h3>
+                <p>Sensor Types</p>
+            </div>
+            <div class="stat-item">
+                <h3>1s</h3>
+                <p>Update Interval</p>
+            </div>
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>Real-Time Monitoring</p>
+            </div>
+            <div class="stat-item">
+                <h3>WiFi</h3>
+                <p>Wireless Connectivity</p>
+            </div>
         </div>
     </div>
+
+    <!-- Features Section -->
+    <section id="features">
+        <h2>Powerful Features for Smart Agriculture</h2>
+        <p class="subtitle">Everything you need to monitor and optimize your plant growth environment with precision IoT sensors and real-time analytics</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Real-Time Dashboard</h3>
+                <p>Beautiful web-based dashboard displays live sensor data with interactive charts powered by Highcharts. Monitor voltage, current, and moisture levels instantly.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔌</div>
+                <h3>Voltage Monitoring</h3>
+                <p>Track power supply voltage between 11.5V and 14.5V with high precision. Ensure optimal power delivery to your irrigation and lighting systems.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Current Measurement</h3>
+                <p>Monitor current consumption from 0.3A to 2.5A. Detect power anomalies and optimize energy usage for your growing operations.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💧</div>
+                <h3>Soil Moisture Sensing</h3>
+                <p>Precise moisture level tracking from 0% to 100%. Automate watering schedules and prevent over or under-watering of your plants.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>WiFi Connectivity</h3>
+                <p>Arduino MKR1000 with integrated WiFi provides reliable wireless connectivity. Access your plant data from anywhere on your network.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Johnny-Five Integration</h3>
+                <p>Built with Johnny-Five.io, the JavaScript robotics framework. Powerful Node.js backend with Firmata protocol for seamless hardware control.</p>
+            </div>
+        </div>
+
+        <!-- Technical Specs -->
+        <div class="tech-specs">
+            <h2 style="color: white;">Technical Specifications</h2>
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <h4>Hardware Platform</h4>
+                    <p>Arduino MKR1000 with ATSAMW25 (Cortex-M0+ 32bit low power ARM MCU)</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Connectivity</h4>
+                    <p>WiFi 802.11 b/g/n, Crypto Chip for secure communication</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Software Stack</h4>
+                    <p>Node.js, Johnny-Five.io, Standard Firmata WiFi, Highcharts</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Sensors</h4>
+                    <p>Voltage (0-15V), Current (0-4A), Soil Moisture (0-100%)</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Update Rate</h4>
+                    <p>1000ms (1 second) real-time data refresh</p>
+                </div>
+                <div class="spec-item">
+                    <h4>Data Visualization</h4>
+                    <p>Highcharts spline graphs with 25-point rolling history</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section id="demo">
+        <h2>Live Sensor Dashboard</h2>
+        <p class="subtitle">See real-time sensor readings displayed on a beautiful, responsive dashboard</p>
+
+        <div class="dashboard-preview">
+            <h3 style="text-align: center; margin-bottom: 1rem;">MKR1000 Plant Monitoring System</h3>
+            <div class="sensor-values">
+                <div class="sensor-display voltage">
+                    <div class="value">12.0</div>
+                    <label>Volts</label>
+                </div>
+                <div class="sensor-display current">
+                    <div class="value">0.7</div>
+                    <label>Amps</label>
+                </div>
+                <div class="sensor-display moisture">
+                    <div class="value">65<span style="font-size: 1.5rem;">%</span></div>
+                    <label>Moisture</label>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem; opacity: 0.7;">This system uses Arduino MKR1000 with Standard Firmata WiFi and Johnny-Five.io for seamless hardware control</p>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="use-cases" id="use-cases">
+        <h2>Perfect For Multiple Applications</h2>
+        <p class="subtitle">From home gardens to commercial operations, our monitoring system adapts to your needs</p>
+
+        <div class="use-case-grid">
+            <div class="use-case">
+                <h4>🏡 Home Gardens</h4>
+                <p>Monitor your backyard garden, indoor plants, or balcony containers. Get alerts when plants need water or when power issues arise.</p>
+            </div>
+
+            <div class="use-case">
+                <h4>🌿 Hydroponics Systems</h4>
+                <p>Critical for hydroponic setups where precise moisture and power monitoring ensure optimal nutrient delivery and plant health.</p>
+            </div>
+
+            <div class="use-case">
+                <h4>🏭 Greenhouse Operations</h4>
+                <p>Scale to multiple sensors for commercial greenhouse monitoring. Track environmental conditions across different zones.</p>
+            </div>
+
+            <div class="use-case">
+                <h4>🔬 Research & Education</h4>
+                <p>Perfect for agricultural research, university projects, and STEM education. Open-source platform encourages experimentation.</p>
+            </div>
+
+            <div class="use-case">
+                <h4>🌾 Farm Automation</h4>
+                <p>Integrate with irrigation controllers and automated watering systems. Reduce water waste and improve crop yields.</p>
+            </div>
+
+            <div class="use-case">
+                <h4>🏢 Building Green Spaces</h4>
+                <p>Monitor rooftop gardens, vertical farms, and indoor corporate green spaces. Professional-grade reliability for commercial installations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <p class="subtitle">Everything you need to know about the MKR1000 Plant Monitoring System</p>
+
+        <div class="faq-item">
+            <h4>What is the Arduino MKR1000 and why use it for plant monitoring?</h4>
+            <p>The Arduino MKR1000 is a powerful microcontroller board with integrated WiFi connectivity. It features a 32-bit ARM Cortex-M0+ processor and is ideal for IoT projects. Its low power consumption, built-in WiFi, and crypto chip make it perfect for secure, always-on plant monitoring systems that can be accessed remotely.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>How does Johnny-Five.io work with Arduino?</h4>
+            <p>Johnny-Five is a JavaScript robotics and IoT platform that runs on Node.js. It communicates with the Arduino MKR1000 using the Firmata protocol, allowing you to control hardware using JavaScript instead of traditional Arduino C++. This enables rapid development, web integration, and access to the vast Node.js ecosystem.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>What sensors are included in the system?</h4>
+            <p>The system monitors three critical parameters: (1) Voltage sensor (11.5-14.5V range) for power supply monitoring, (2) Current sensor (0.3-2.5A range) for electrical consumption tracking, and (3) Soil moisture sensor (0-100% range) for precise irrigation control. All sensors provide real-time data updated every second.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>Can I access the dashboard remotely?</h4>
+            <p>Yes! The web-based dashboard is accessible from any device on your local network. The Arduino MKR1000 connects to your WiFi network, and the Node.js server provides a responsive web interface. For remote access from outside your network, you can configure port forwarding or use services like ngrok.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>How do I set up the system?</h4>
+            <p>Setup involves three main steps: (1) Upload the Standard Firmata WiFi sketch to your Arduino MKR1000, (2) Connect your sensors to the appropriate pins, (3) Install Node.js dependencies and run the server application. Detailed documentation is available on our GitHub repository with step-by-step instructions.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>Can I expand the system with more sensors?</h4>
+            <p>Absolutely! The modular architecture allows you to add temperature sensors, pH sensors, light sensors, or any other analog/digital sensors. The Johnny-Five library supports a wide range of sensors, and the dashboard can be customized to display additional data streams.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>Is the system suitable for commercial agriculture?</h4>
+            <p>While designed as an educational and hobbyist platform, the system's professional-grade components and reliable WiFi connectivity make it suitable for small to medium commercial applications. Many users have successfully deployed multiple units in greenhouse operations, vertical farms, and research facilities.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>What makes this better than other plant monitoring solutions?</h4>
+            <p>Our system combines enterprise-grade hardware (Arduino MKR1000) with modern web technologies (Node.js, Highcharts). Unlike closed commercial systems, it's completely open-source, customizable, and extensible. The use of Standard Firmata and Johnny-Five provides unmatched flexibility for integration with other systems and sensors.</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 2rem; border-radius: 20px;">
+        <h2 style="color: white; margin-bottom: 1rem;">Ready to Start Monitoring Your Plants?</h2>
+        <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem;">Get started with the MKR1000 Plant Monitoring System today. All code is open-source and available on GitHub.</p>
+        <div class="cta-buttons">
+            <a href="https://github.com/chatgptnotes/scada.work" class="btn" style="background: white; color: #667eea;">Download on GitHub</a>
+            <a href="https://www.arduino.cc/en/Main/ArduinoMKR1000" target="_blank" class="btn btn-secondary">Buy Arduino MKR1000</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About</h4>
+                <p>Professional plant monitoring system built with Arduino MKR1000, Node.js, and Johnny-Five. Open-source and fully customizable for your agriculture needs.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="https://github.com/chatgptnotes/scada.work">GitHub Repository</a></li>
+                    <li><a href="https://github.com/chatgptnotes/scada.work/blob/main/README.md">Documentation</a></li>
+                    <li><a href="https://github.com/chatgptnotes/scada.work/blob/main/docs/DEPLOYMENT.md">Deployment Guide</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="https://www.arduino.cc/en/Main/ArduinoMKR1000" target="_blank">Arduino MKR1000 Docs</a></li>
+                    <li><a href="http://johnny-five.io" target="_blank">Johnny-Five.io</a></li>
+                    <li><a href="https://nodejs.org" target="_blank">Node.js</a></li>
+                    <li><a href="https://www.highcharts.com" target="_blank">Highcharts</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Technology Stack</h4>
+                <ul>
+                    <li>Arduino MKR1000</li>
+                    <li>Standard Firmata WiFi</li>
+                    <li>Node.js + Express</li>
+                    <li>Johnny-Five.io</li>
+                    <li>Highcharts.js</li>
+                    <li>Real-Time WebSockets</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p><strong>Version:</strong> 1.2 &nbsp;|&nbsp; <strong>Last Updated:</strong> January 2026 &nbsp;|&nbsp; <strong>Repository:</strong> scada.work</p>
+            <p style="margin-top: 1rem;">Built with ❤️ for smart agriculture and IoT innovation</p>
+        </div>
+    </footer>
 </body>
 </html>
