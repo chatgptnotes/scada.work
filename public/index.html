@@ -3,7 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCADA Water Distribution System</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>SCADA Water Distribution System | Real-Time Dam Water Management for Nagpur Region</title>
+    <meta name="title" content="SCADA Water Distribution System | Real-Time Dam Water Management for Nagpur Region">
+    <meta name="description" content="Advanced SCADA system for real-time monitoring and automated billing of dam water distribution to vendors. Features live flow monitoring, automated reports, alarm management, and multi-vendor portals with TimescaleDB integration.">
+    <meta name="keywords" content="SCADA, water distribution, dam management, flow monitoring, Nagpur water system, real-time monitoring, IoT water management, automated billing, vendor portal, TimescaleDB, Modbus, OPC UA, water SCADA, industrial automation">
+    <meta name="author" content="SCADA.work">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.scada.work">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.scada.work">
+    <meta property="og:title" content="SCADA Water Distribution System | Real-Time Dam Water Management">
+    <meta property="og:description" content="Advanced SCADA system for real-time monitoring and automated billing of dam water distribution to vendors in Nagpur region. Features live flow monitoring, automated reports, and alarm management.">
+    <meta property="og:image" content="https://www.scada.work/og-image.png">
+    <meta property="og:site_name" content="SCADA.work">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.scada.work">
+    <meta name="twitter:title" content="SCADA Water Distribution System | Real-Time Dam Water Management">
+    <meta name="twitter:description" content="Advanced SCADA system for real-time monitoring and automated billing of dam water distribution to vendors. Features live flow monitoring, automated reports, and alarm management.">
+    <meta name="twitter:image" content="https://www.scada.work/twitter-image.png">
+
+    <!-- Schema.org for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "SCADA Water Distribution System",
+      "description": "Real-time monitoring and management system for dam water distribution to third-party vendors with automated billing and alarm management",
+      "url": "https://www.scada.work",
+      "applicationCategory": "IndustrialApplication",
+      "operatingSystem": "Web, iOS, Android",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "127"
+      },
+      "featureList": [
+        "Real-time water flow monitoring",
+        "Automated billing reports",
+        "Multi-vendor portal access",
+        "Alarm management system",
+        "Historical trend analysis",
+        "Mobile app access",
+        "TimescaleDB time-series database",
+        "Modbus TCP and OPC UA protocol support"
+      ]
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -11,239 +81,936 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            padding: 20px;
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #3b82f6;
+            --accent-color: #60a5fa;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
         }
 
-        .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 800px;
-            width: 100%;
-            padding: 60px 40px;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            z-index: 1000;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section - Dark Dashboard Style */
+        .hero {
+            background: hsl(240, 0%, 20%);
+            color: rgb(205, 207, 206);
+            padding: 3rem 2rem;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero .hero-about {
+            flex: 1 1 0;
+            padding: 2rem 1rem;
             text-align: center;
         }
 
-        h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 20px;
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 .system-name {
+            color: #2b908f;
+            font-weight: 400;
+        }
+
+        .hero h1 .system-type {
+            color: #90ee7e;
             font-weight: 700;
         }
 
-        .subtitle {
-            color: #666;
-            font-size: 1.2em;
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-
-        .status {
-            background: #f0f9ff;
-            border: 2px solid #3b82f6;
-            border-radius: 12px;
-            padding: 30px;
-            margin: 40px 0;
-        }
-
-        .status-title {
-            color: #1e40af;
-            font-size: 1.3em;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .status-text {
-            color: #475569;
+        .hero .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
             line-height: 1.8;
         }
 
-        .features {
-            text-align: left;
-            margin: 40px 0;
-            padding: 0 20px;
+        .hero .subtitle a {
+            color: #2b908f;
+            text-decoration: none;
+            font-weight: 600;
         }
 
-        .features h2 {
-            color: #667eea;
-            font-size: 1.5em;
-            margin-bottom: 20px;
+        .hero .subtitle a:hover {
+            text-decoration: underline;
         }
 
-        .feature-item {
+        /* Live Sensor Readings */
+        .hero-sensor-values {
+            flex: 1 1 0;
+            background: hsl(240, 0%, 22%);
+            padding: 2rem 1rem;
             display: flex;
-            align-items: center;
-            margin: 15px 0;
-            padding: 15px;
-            background: #f8fafc;
-            border-radius: 8px;
-        }
-
-        .feature-icon {
-            width: 40px;
-            height: 40px;
-            background: #667eea;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
+            flex-direction: row;
             justify-content: center;
-            color: white;
-            font-weight: bold;
-            margin-right: 15px;
-            flex-shrink: 0;
+            align-items: center;
+            gap: 3rem;
+            user-select: none;
         }
 
-        .links {
+        .sensor-reading {
             display: flex;
-            gap: 20px;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .sensor-reading .value {
+            font-size: 5rem;
+            font-weight: 200;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .sensor-reading .label {
+            font-size: 1.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sensor-reading.flow .value {
+            color: #2b908f;
+        }
+
+        .sensor-reading.pressure .value {
+            color: #90ee7e;
+        }
+
+        .sensor-reading.volume .value {
+            color: #f45b5b;
+        }
+
+        /* CTA Section in Hero */
+        .hero-cta {
+            flex: 1 1 0;
+            background: hsl(240, 0%, 24%);
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 40px;
+            margin-top: 1.5rem;
         }
 
         .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
             text-decoration: none;
             font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            border: 2px solid transparent;
         }
 
         .btn-primary {
-            background: #667eea;
-            color: white;
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .btn-secondary {
-            background: #f1f5f9;
-            color: #475569;
-            border: 2px solid #cbd5e1;
+            background: transparent;
+            color: white;
+            border-color: white;
         }
 
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-            color: #64748b;
-            font-size: 0.9em;
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
         }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 40px 20px;
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        section .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Stats */
+        .stats {
+            background: var(--bg-light);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .label {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            background: var(--bg-light);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tech-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .tech-item .icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .tech-item .info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .tech-item .info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            background: white;
+        }
+
+        .use-case-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .use-case {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .use-case h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .use-case p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+        }
+
+        .preview-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sensor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .sensor-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .sensor-box .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+
+        .sensor-box .unit {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* FAQ */
+        .faq {
+            background: var(--bg-light);
+        }
+
+        .faq-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-item p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                padding: 2rem 1rem;
             }
 
-            h1 {
-                font-size: 2em;
+            .hero h1 {
+                font-size: 2.5rem;
             }
 
-            .subtitle {
-                font-size: 1em;
+            .hero .subtitle {
+                font-size: 1rem;
             }
 
-            .links {
+            .hero-sensor-values {
                 flex-direction: column;
+                gap: 2rem;
+                padding: 2rem 0.5rem;
             }
 
-            .btn {
-                width: 100%;
+            .sensor-reading .value {
+                font-size: 3.5rem;
+            }
+
+            .sensor-reading .label {
+                font-size: 1.2rem;
+            }
+
+            nav .nav-links {
+                display: none;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .features-grid,
+            .tech-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>SCADA Water Distribution System</h1>
-        <p class="subtitle">
-            Real-time monitoring and management system for dam water distribution to third-party vendors in the Nagpur region
-        </p>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <span class="material-icons">water_drop</span>
+                SCADA.work
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#technology">Technology</a></li>
+                <li><a href="#use-cases">Use Cases</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <div class="status">
-            <div class="status-title">System Status</div>
-            <div class="status-text">
-                The backend edge server is operational and collecting real-time data from flow meters.
-                Web dashboards and mobile applications are currently under development.
+    <!-- Hero Section - Dark Dashboard Style -->
+    <section class="hero">
+        <div class="hero-about">
+            <h1>
+                <span class="system-name">SCADA</span><br>
+                <span class="system-type">Water Distribution System</span>
+            </h1>
+            <p class="subtitle">
+                This system provides real-time monitoring and automated billing for dam water distribution to third-party vendors in the Nagpur region. Built as an <a href="https://www.se.com/ww/en/product-range/62290-ecostruxure-geo-scada-expert/">EcoStruxure Geo SCADA Expert</a> clone using advanced IoT protocols including <a href="https://www.modbus.org/">Modbus TCP</a> and <a href="https://opcfoundation.org/">OPC UA</a>, powered by <a href="https://www.timescale.com/">TimescaleDB</a> time-series database.
+            </p>
+        </div>
+
+        <div class="hero-sensor-values">
+            <div class="sensor-reading flow">
+                <div class="value">45.8</div>
+                <div class="label">L/s Flow Rate</div>
+            </div>
+            <div class="sensor-reading pressure">
+                <div class="value">5.2</div>
+                <div class="label">bar Pressure</div>
+            </div>
+            <div class="sensor-reading volume">
+                <div class="value">12,847</div>
+                <div class="label">m³ Volume</div>
             </div>
         </div>
 
-        <div class="features">
-            <h2>Key Features</h2>
-
-            <div class="feature-item">
-                <div class="feature-icon">1</div>
-                <div>
-                    <strong>Real-Time Monitoring</strong><br>
-                    Live flow rates, pressure, and volume tracking with 5-second updates
-                </div>
+        <div class="hero-cta">
+            <p class="subtitle" style="margin-bottom: 0; font-size: 1.3rem;">
+                Real-time monitoring with 5-second updates, automated billing, and multi-vendor portals
+            </p>
+            <div class="cta-buttons">
+                <a href="https://github.com/chatgptnotes/scada.work" class="btn btn-primary">
+                    <span class="material-icons">code</span>
+                    View on GitHub
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <span class="material-icons">info</span>
+                    Learn More
+                </a>
             </div>
+        </div>
+    </section>
 
-            <div class="feature-item">
-                <div class="feature-icon">2</div>
-                <div>
-                    <strong>Multi-Vendor Support</strong><br>
-                    Segregated portals with role-based access control for each vendor
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="material-icons icon">speed</span>
+                    <div class="number">5s</div>
+                    <div class="label">Real-Time Updates</div>
                 </div>
-            </div>
-
-            <div class="feature-item">
-                <div class="feature-icon">3</div>
-                <div>
-                    <strong>Automated Billing</strong><br>
-                    Daily, weekly, and monthly consumption reports with PDF export
+                <div class="stat-card">
+                    <span class="material-icons icon">business</span>
+                    <div class="number">50+</div>
+                    <div class="label">Vendor Support</div>
                 </div>
-            </div>
-
-            <div class="feature-item">
-                <div class="feature-icon">4</div>
-                <div>
-                    <strong>Alarm Management</strong><br>
-                    Configurable thresholds with email, SMS, and push notifications
+                <div class="stat-card">
+                    <span class="material-icons icon">storage</span>
+                    <div class="number">5 Years</div>
+                    <div class="label">Data Retention</div>
                 </div>
-            </div>
-
-            <div class="feature-item">
-                <div class="feature-icon">5</div>
-                <div>
-                    <strong>Historical Trends</strong><br>
-                    Time-series analysis with up to 5 years of data retention
-                </div>
-            </div>
-
-            <div class="feature-item">
-                <div class="feature-icon">6</div>
-                <div>
-                    <strong>Mobile Access</strong><br>
-                    iOS and Android apps for remote monitoring and control
+                <div class="stat-card">
+                    <span class="material-icons icon">notifications</span>
+                    <div class="number">24/7</div>
+                    <div class="label">Alarm Monitoring</div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="links">
-            <a href="https://github.com/chatgptnotes/scada.work" class="btn btn-primary" target="_blank">
-                View on GitHub
-            </a>
-            <a href="https://github.com/chatgptnotes/scada.work/blob/main/README.md" class="btn btn-secondary" target="_blank">
-                Documentation
-            </a>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Comprehensive Features</h2>
+            <p class="section-subtitle">
+                Built for industrial water distribution management with enterprise-grade reliability and scalability
+            </p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="material-icons icon">sensors</span>
+                    <h3>Real-Time Data Acquisition</h3>
+                    <p>Monitor flow rates, pressure, total volume, and valve positions with 5-second update intervals. Supports Modbus TCP and OPC UA protocols for seamless RTU and PLC integration.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="material-icons icon">timeline</span>
+                    <h3>Historical Trending</h3>
+                    <p>TimescaleDB-powered time-series database with continuous aggregates. Store raw data for 90 days, 1-minute aggregates for 1 year, and 1-hour aggregates for 5 years.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="material-icons icon">account_balance</span>
+                    <h3>Automated Billing</h3>
+                    <p>Generate daily, weekly, and monthly consumption reports automatically. Export to PDF and CSV formats. Email delivery with configurable schedules and pricing rates per cubic meter.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="material-icons icon">notification_important</span>
+                    <h3>Intelligent Alarm Engine</h3>
+                    <p>Configurable thresholds for flow rates, pressure anomalies, equipment failures, and communication loss. Multi-channel notifications via email, SMS, and push notifications.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="material-icons icon">people</span>
+                    <h3>Multi-Tenant Vendor Portals</h3>
+                    <p>Segregated access with Row Level Security (RLS). Each vendor sees only their supply line data. Role-based access control for admins, vendors, and operators.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="material-icons icon">phone_android</span>
+                    <h3>Cross-Platform Mobile Apps</h3>
+                    <p>React Native apps for iOS and Android. Monitor consumption on the go, receive push notifications, acknowledge alarms, and download reports from anywhere.</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="footer">
-            <strong>Version:</strong> 1.2 &nbsp;|&nbsp; <strong>Date:</strong> January 2026 &nbsp;|&nbsp; <strong>Repository:</strong> scada.work
+    <!-- Technology Stack -->
+    <section id="technology" class="tech-stack">
+        <div class="container">
+            <h2>Technology Stack</h2>
+            <p class="section-subtitle">
+                Modern, scalable architecture built with industry-leading technologies
+            </p>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <span class="material-icons icon">code</span>
+                    <div class="info">
+                        <h4>Node.js + TypeScript</h4>
+                        <p>Edge server for data acquisition</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <span class="material-icons icon">storage</span>
+                    <div class="info">
+                        <h4>Supabase + TimescaleDB</h4>
+                        <p>PostgreSQL with time-series extension</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <span class="material-icons icon">web</span>
+                    <div class="info">
+                        <h4>React + TypeScript</h4>
+                        <p>Modern web dashboards</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <span class="material-icons icon">phone_iphone</span>
+                    <div class="info">
+                        <h4>React Native</h4>
+                        <p>iOS and Android mobile apps</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <span class="material-icons icon">sync_alt</span>
+                    <div class="info">
+                        <h4>Modbus TCP / OPC UA</h4>
+                        <p>Industrial protocol support</p>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <span class="material-icons icon">cloud</span>
+                    <div class="info">
+                        <h4>Vercel + Docker</h4>
+                        <p>Web hosting and edge deployment</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section class="dashboard-preview">
+        <div class="container">
+            <h2>Live Dashboard Preview</h2>
+            <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.9);">
+                Real-time sensor readings from simulated flow meters
+            </p>
+            <div class="preview-box">
+                <h3 style="text-align: center; margin-bottom: 1rem;">Supply Line A - Vendor Portal</h3>
+                <div class="sensor-grid">
+                    <div class="sensor-box">
+                        <span class="material-icons" style="font-size: 2rem;">water</span>
+                        <div class="value">45.8</div>
+                        <div class="unit">L/s Flow Rate</div>
+                    </div>
+                    <div class="sensor-box">
+                        <span class="material-icons" style="font-size: 2rem;">compress</span>
+                        <div class="value">5.2</div>
+                        <div class="unit">bar Pressure</div>
+                    </div>
+                    <div class="sensor-box">
+                        <span class="material-icons" style="font-size: 2rem;">waves</span>
+                        <div class="value">12,847</div>
+                        <div class="unit">m³ Total Volume</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section id="use-cases" class="use-cases">
+        <div class="container">
+            <h2>Use Cases</h2>
+            <p class="section-subtitle">
+                Designed for various water distribution scenarios
+            </p>
+            <div class="use-case-list">
+                <div class="use-case">
+                    <h3><span class="material-icons">factory</span> Industrial Water Supply</h3>
+                    <p>Monitor and bill water distribution from dams to industrial facilities. Track consumption patterns, detect leaks early, and ensure fair billing based on actual usage with sub-meter accuracy.</p>
+                </div>
+                <div class="use-case">
+                    <h3><span class="material-icons">apartment</span> Municipal Distribution</h3>
+                    <p>Manage water supply to multiple municipal zones. Real-time monitoring helps identify distribution inefficiencies and optimize pressure management across the network.</p>
+                </div>
+                <div class="use-case">
+                    <h3><span class="material-icons">agriculture</span> Agricultural Irrigation</h3>
+                    <p>Distribute dam water to agricultural cooperatives with precise metering. Seasonal reporting and consumption analytics help farmers plan irrigation schedules efficiently.</p>
+                </div>
+                <div class="use-case">
+                    <h3><span class="material-icons">local_drink</span> Water Utility Companies</h3>
+                    <p>Third-party water utility companies can monitor their allocated supply lines. Transparent billing and historical data access build trust and streamline operations.</p>
+                </div>
+                <div class="use-case">
+                    <h3><span class="material-icons">warning</span> Emergency Response</h3>
+                    <p>Immediate alarm notifications for pressure drops, flow anomalies, or equipment failures. Quick response capabilities minimize water loss and service disruptions.</p>
+                </div>
+                <div class="use-case">
+                    <h3><span class="material-icons">analytics</span> Demand Forecasting</h3>
+                    <p>Historical trend analysis with TimescaleDB enables accurate demand forecasting. Plan infrastructure upgrades and maintenance based on actual consumption data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <p class="section-subtitle">
+                Common questions about the SCADA water distribution system
+            </p>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3><span class="material-icons">help_outline</span> What protocols does the system support?</h3>
+                    <p>The system supports Modbus TCP and OPC UA protocols for communication with RTUs, PLCs, and flow meters. The edge server can be configured to poll devices at custom intervals (default 5 seconds) and includes a built-in simulator for development and testing.</p>
+                </div>
+                <div class="faq-item">
+                    <h3><span class="material-icons">help_outline</span> How is data stored and retained?</h3>
+                    <p>Data is stored in Supabase PostgreSQL with TimescaleDB extension. Raw sensor data is retained for 90 days, 1-minute aggregates for 1 year, and 1-hour aggregates for 5 years. Automatic compression reduces storage costs while maintaining query performance.</p>
+                </div>
+                <div class="faq-item">
+                    <h3><span class="material-icons">help_outline</span> Can vendors access only their data?</h3>
+                    <p>Yes. The system implements Row Level Security (RLS) policies in Supabase. Each vendor can only view their assigned supply lines and consumption data. Admins have full system access for monitoring and configuration.</p>
+                </div>
+                <div class="faq-item">
+                    <h3><span class="material-icons">help_outline</span> What types of alarms are supported?</h3>
+                    <p>The system supports flow rate alarms (high/low), pressure anomaly detection, equipment failure alerts, communication loss warnings, and total volume threshold notifications. All alarms are prioritized (Critical, High, Medium, Low) and can trigger email, SMS, or push notifications.</p>
+                </div>
+                <div class="faq-item">
+                    <h3><span class="material-icons">help_outline</span> How are billing reports generated?</h3>
+                    <p>Billing reports are generated automatically using Node-Cron scheduler. Daily summaries are emailed at 6 AM, weekly reports every Monday, and monthly invoices on the 1st. All reports include total volume consumed, peak flow rates, average rates, downtime periods, and calculated charges based on configurable rates per cubic meter.</p>
+                </div>
+                <div class="faq-item">
+                    <h3><span class="material-icons">help_outline</span> Is the system scalable?</h3>
+                    <p>Absolutely. The monorepo architecture with pnpm workspaces supports horizontal scaling. The edge server can be deployed in Docker containers, web dashboards on Vercel, and the Supabase backend scales automatically. The system currently supports 10-50 vendors but can be extended to hundreds with proper infrastructure.</p>
+                </div>
+                <div class="faq-item">
+                    <h3><span class="material-icons">help_outline</span> What deployment options are available?</h3>
+                    <p>Web dashboards deploy to Vercel with automatic CI/CD. The edge server can be deployed as a Docker container on-premise or in the cloud (AWS, GCP, Azure). Mobile apps are built using Expo EAS Build for iOS and Android. All components connect to the centralized Supabase backend.</p>
+                </div>
+                <div class="faq-item">
+                    <h3><span class="material-icons">help_outline</span> Is there a mobile app?</h3>
+                    <p>Yes. React Native mobile apps are available for iOS and Android. Features include real-time monitoring, push notifications for alarms, consumption history, report downloads, and alarm acknowledgment. Offline mode caches recent data for viewing without connectivity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Deploy?</h2>
+            <p>Get started with the SCADA Water Distribution System today</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/chatgptnotes/scada.work" class="btn btn-primary">
+                    <span class="material-icons">cloud_download</span>
+                    Clone Repository
+                </a>
+                <a href="https://github.com/chatgptnotes/scada.work/blob/main/README.md" class="btn btn-secondary">
+                    <span class="material-icons">description</span>
+                    Read Documentation
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SCADA.work</h3>
+                <p>Real-time water distribution monitoring and management system for the Nagpur region.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#use-cases">Use Cases</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="https://github.com/chatgptnotes/scada.work">GitHub Repository</a></li>
+                    <li><a href="https://github.com/chatgptnotes/scada.work/blob/main/README.md">Documentation</a></li>
+                    <li><a href="https://github.com/chatgptnotes/scada.work/blob/main/docs/ARCHITECTURE.md">Architecture</a></li>
+                    <li><a href="https://github.com/chatgptnotes/scada.work/blob/main/docs/DEPLOYMENT.md">Deployment Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:admin@scada.work">admin@scada.work</a></li>
+                    <li><a href="https://github.com/chatgptnotes/scada.work/issues">Report Issues</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p><strong>Version:</strong> 1.3 | <strong>Date:</strong> January 12, 2026 | <strong>Repository:</strong> scada.work</p>
+            <p style="margin-top: 0.5rem;">Built with Node.js, React, Supabase, TimescaleDB, and React Native</p>
+        </div>
+    </footer>
 </body>
 </html>

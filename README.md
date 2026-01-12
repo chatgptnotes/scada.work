@@ -351,8 +351,8 @@ For issues and questions:
 
 ---
 
-**Version:** 1.2
+**Version:** 1.3
 **Date:** January 2026
 **Repository:** scada.work
 **Live Demo:** https://www.scada.work
-**Production URL:** https://scada-work-ag2z0cztt-chatgptnotes-6366s-projects.vercel.app
+**Production URL:** https://scada-work-fu7f8a9c1-chatgptnotes-6366s-projects.vercel.app
