@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import pino from 'pino';
+import path from 'path';
 
 import { createSupabaseClient } from './config/supabase';
 import { startSimulator } from './simulator';
@@ -10,8 +11,8 @@ import { startHistorian } from './historian';
 import { startAlarmEngine } from './alarms';
 import { createAPIRouter } from './api';
 
-// Load environment variables
-dotenv.config();
+// Load environment variables from root directory
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 
 // Create logger
 const logger = pino({
