@@ -1,0 +1,56 @@
+{
+  "name": "scada-water-distribution",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Water Distribution SCADA System - EcoStruxure Geo SCADA Expert Clone",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chatgptnotes/scada.work.git"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "edge:dev": "pnpm --filter edge-server dev",
+    "web:dev": "pnpm --filter web-dashboard dev",
+    "vendor:dev": "pnpm --filter vendor-portal dev",
+    "admin:dev": "pnpm --filter admin-dashboard dev",
+    "mobile:dev": "pnpm --filter mobile dev",
+    "edge:build": "pnpm --filter edge-server build",
+    "web:build": "pnpm --filter web-dashboard build",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "turbo": "^1.11.3",
+    "typescript": "^5.3.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "packageManager": "pnpm@8.14.0"
+}
